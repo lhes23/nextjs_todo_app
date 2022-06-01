@@ -1,23 +1,36 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Home() {
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:3000/api/todo");
+  const data = await res.json();
+  return {
+    props: {
+      // todos: JSON.parse(JSON.stringify(data)),
+      todos: data,
+    },
+  };
+}
+
+export default function Home({ todos }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    console.log(todos);
+  }, []);
+
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/todo", {
+    await fetch("/api/todo", {
       method: "POST",
       body: JSON.stringify({ title, description }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = res.json();
-    console.log(data);
   };
 
   return (
@@ -48,6 +61,15 @@ export default function Home() {
           />
           <button>Submit</button>
         </form>
+        {todos?.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          todos.data.map((todo) => (
+            <div key={todo._id}>
+              {todo.title} - {todo.description}
+            </div>
+          ))
+        )}
       </main>
     </div>
   );

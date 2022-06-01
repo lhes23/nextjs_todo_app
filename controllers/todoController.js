@@ -1,10 +1,12 @@
 import dbConnect from "../utils/dbConnect";
 import Todo from "../models/todoModel";
 
+dbConnect();
+
 export const getAllTodo = async (req, res) => {
   try {
-    const todos = await Todo.find();
-    return res.status(200).json({ todos });
+    const todos = await Todo.find({});
+    return res.status(200).json({ data: todos });
   } catch (error) {
     return res.status(400).json({ error });
   }
