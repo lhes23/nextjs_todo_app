@@ -15,7 +15,8 @@ export const getAllTodo = async (req, res) => {
 export const addTodo = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const todos = await Todo.create({ title, description });
+    await Todo.create({ title, description });
+    const todos = await Todo.find({});
     return res.status(201).json({ todos });
   } catch (error) {
     return res.status(400).json({ error });
@@ -25,19 +26,21 @@ export const addTodo = async (req, res) => {
 export const updateTodo = async (req, res) => {
   try {
     const { _id, title, description } = req.body;
-    const todos = await Todo.findByIdAndUpdate({ _id }, { title, description });
+    await Todo.findByIdAndUpdate({ _id }, { title, description });
+    const todos = await Todo.find({});
     return res.status(201).json({ todos });
   } catch (error) {
-    res.status(401).json({ error });
+    return res.status(401).json({ error });
   }
 };
 
 export const deleteTodo = async (req, res) => {
   try {
     const { _id } = req.body;
-    const todos = await Todo.findByIdAndDelete({ _id });
+    await Todo.findByIdAndDelete({ _id });
+    const todos = await Todo.find({});
     return res.status(201).json({ todos });
   } catch (error) {
-    res.status(401).json({ error });
+    return res.status(401).json({ error });
   }
 };
