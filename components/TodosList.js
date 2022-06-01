@@ -1,4 +1,8 @@
+import { useRouter } from "next/router";
+
 const TodosList = ({ todos }) => {
+  const router = useRouter();
+
   const deleteTodoHandler = async (_id) => {
     await fetch(`api/todo/`, {
       method: "DELETE",
@@ -7,7 +11,6 @@ const TodosList = ({ todos }) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(_id);
   };
   return (
     <>

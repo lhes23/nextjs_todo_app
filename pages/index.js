@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AddTodoForm from "../components/addTodoForm";
 import Layout from "../components/Layout";
 import TodosList from "../components/TodosList";
