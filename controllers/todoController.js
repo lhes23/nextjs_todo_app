@@ -24,4 +24,12 @@ export const addTodo = async (req, res) => {
 
 export const updateTodo = async (req, res) => {};
 
-export const deleteTodo = async (req, res) => {};
+export const deleteTodo = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const todos = await Todo.findByIdAndDelete({ _id });
+    return res.status(201).json({ todos });
+  } catch (error) {
+    res.status(401).json({ error });
+  }
+};
