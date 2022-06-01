@@ -22,7 +22,15 @@ export const addTodo = async (req, res) => {
   }
 };
 
-export const updateTodo = async (req, res) => {};
+export const updateTodo = async (req, res) => {
+  try {
+    const { _id, title, description } = req.body;
+    const todos = await Todo.findByIdAndUpdate({ _id }, { title, description });
+    return res.status(201).json({ todos });
+  } catch (error) {
+    res.status(401).json({ error });
+  }
+};
 
 export const deleteTodo = async (req, res) => {
   try {
