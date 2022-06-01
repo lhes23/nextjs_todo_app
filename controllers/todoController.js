@@ -10,7 +10,15 @@ export const getAllTodo = async (req, res) => {
   }
 };
 
-export const addTodo = async (req, res) => {};
+export const addTodo = async (req, res) => {
+  try {
+    const { title, description } = req.body;
+    const todos = await Todo.create({ title, description });
+    return res.status(201).json({ todos });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+};
 
 export const updateTodo = async (req, res) => {};
 
