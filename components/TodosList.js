@@ -48,6 +48,12 @@ const TodosList = ({
               key={todo._id}
               initial="hidden"
               animate="visible"
+              whileHover={{
+                scale: 1.05,
+                transition: {
+                  duration: 0.1,
+                },
+              }}
               variants={{
                 hidden: {
                   opacity: 0,
