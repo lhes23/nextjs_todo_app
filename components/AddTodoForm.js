@@ -1,4 +1,5 @@
 import styles from "../styles/Home.module.css";
+import { motion } from "framer-motion";
 
 const AddTodoForm = ({
   todo_api_url,
@@ -43,7 +44,19 @@ const AddTodoForm = ({
     }
   };
   return (
-    <div className={`col-6 d-flex justify-content-center ${styles.formCard}`}>
+    <motion.div
+      className={`col-6 d-flex justify-content-center ${styles.formCard}`}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          opacity: 0,
+        },
+        visible: {
+          opacity: 1,
+        },
+      }}
+    >
       <div className="col-12">
         <form onSubmit={formSubmitHandler}>
           <div className="form-group">
@@ -72,7 +85,7 @@ const AddTodoForm = ({
           <button className="btn btn-primary my-4">Submit</button>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default AddTodoForm;

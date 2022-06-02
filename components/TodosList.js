@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import { motion } from "framer-motion";
 
 const TodosList = ({
   todos,
@@ -43,8 +43,26 @@ const TodosList = ({
         {todos?.length === 0 ? (
           <p>Loading...</p>
         ) : (
-          todos.map((todo) => (
-            <tr key={todo._id}>
+          todos.map((todo, i) => (
+            <motion.tr
+              key={todo._id}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: 50,
+                },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.2,
+                    delay: i * 0.3,
+                  },
+                },
+              }}
+            >
               <th scope="row">{todo._id}</th>
               <td>{todo.title}</td>
               <td>{todo.description}</td>
@@ -66,7 +84,7 @@ const TodosList = ({
                   Delete
                 </button>
               </td>
-            </tr>
+            </motion.tr>
           ))
         )}
       </tbody>
