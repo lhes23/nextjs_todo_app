@@ -1,3 +1,5 @@
+import styles from "../styles/Home.module.css";
+
 const TodosList = ({
   todos,
   todo_api_url,
@@ -32,7 +34,7 @@ const TodosList = ({
           <th scope="col">Todo ID</th>
           <th scope="col">Title</th>
           <th scope="col">Description</th>
-          <th scope="col" colSpan={2}>
+          <th scope="col" colSpan={2} className="text-center">
             Actions
           </th>
         </tr>

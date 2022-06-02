@@ -1,3 +1,5 @@
+import styles from "../styles/Home.module.css";
+
 const AddTodoForm = ({
   todo_api_url,
   title,
@@ -41,8 +43,8 @@ const AddTodoForm = ({
     }
   };
   return (
-    <div className="d-flex justify-content-center">
-      <div className="col-6">
+    <div className={`col-6 d-flex justify-content-center ${styles.formCard}`}>
+      <div className="col-12">
         <form onSubmit={formSubmitHandler}>
           <div className="form-group">
             <label htmlFor="title">Title</label>
