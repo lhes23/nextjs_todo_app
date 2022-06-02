@@ -9,8 +9,7 @@ import {
 dbConnect();
 
 const handler = async (req, res) => {
-  const { method } = req;
-  switch (method) {
+  switch (req.method) {
     case "GET":
       await getAllTodo(req, res);
       break;
