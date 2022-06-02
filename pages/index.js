@@ -31,8 +31,8 @@ export default function Home({ todos }) {
     router.replace(router.asPath);
   };
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
+    <div className="container">
+      <div className={`row ${styles.main}`}>
         <AddTodoForm
           todo_api_url={todo_api_url}
           title={title}

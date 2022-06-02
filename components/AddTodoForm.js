@@ -41,32 +41,36 @@ const AddTodoForm = ({
     }
   };
   return (
-    <form onSubmit={formSubmitHandler}>
-      <div className="form-group">
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
-        <textarea
-          type="text"
-          name="description"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="form-control"
-        />
-      </div>
+    <div className="row">
+      <div className="col-6">
+        <form onSubmit={formSubmitHandler}>
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              type="text"
+              name="description"
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="form-control"
+            />
+          </div>
 
-      <button className="btn btn-primary">Submit</button>
-    </form>
+          <button className="btn btn-primary my-4">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 };
 export default AddTodoForm;

@@ -27,7 +27,7 @@ const TodosList = ({
     }
   };
   return (
-    <table class="table table-striped table-light table-responsive">
+    <table className="table table-striped table-light table-responsive my-4">
       <thead>
         <tr>
           <th scope="col">Todo ID</th>
@@ -43,7 +43,7 @@ const TodosList = ({
           <p>Loading...</p>
         ) : (
           todos.map((todo) => (
-            <tr>
+            <tr key={todo._id}>
               <th scope="row">{todo._id}</th>
               <td>{todo.title}</td>
               <td>{todo.description}</td>
@@ -52,12 +52,16 @@ const TodosList = ({
                   onClick={() =>
                     editTodoHandler(todo._id, todo.title, todo.description)
                   }
+                  className="btn btn-warning"
                 >
                   Edit
                 </button>
               </td>
               <td>
-                <button onClick={() => deleteTodoHandler(todo._id)}>
+                <button
+                  onClick={() => deleteTodoHandler(todo._id)}
+                  className="btn btn-danger"
+                >
                   Delete
                 </button>
               </td>
