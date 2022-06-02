@@ -41,7 +41,7 @@ const AddTodoForm = ({
     }
   };
   return (
-    <div className="row">
+    <div className="d-flex justify-content-center">
       <div className="col-6">
         <form onSubmit={formSubmitHandler}>
           <div className="form-group">

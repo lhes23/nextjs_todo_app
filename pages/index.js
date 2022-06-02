@@ -33,6 +33,9 @@ export default function Home({ todos }) {
   return (
     <div className="container">
       <div className={`row ${styles.main}`}>
+        <div className="d-flex justify-content-center">
+          <h1>NextJS Todo App</h1>
+        </div>
         <AddTodoForm
           todo_api_url={todo_api_url}
           title={title}
