@@ -27,25 +27,45 @@ const TodosList = ({
     }
   };
   return (
-    <>
-      {todos?.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        todos.map((todo) => (
-          <div key={todo._id}>
-            {todo.title} - {todo.description} -{" "}
-            <button
-              onClick={() =>
-                editTodoHandler(todo._id, todo.title, todo.description)
-              }
-            >
-              Edit
-            </button>
-            <button onClick={() => deleteTodoHandler(todo._id)}>Delete</button>
-          </div>
-        ))
-      )}
-    </>
+    <table class="table table-striped table-light table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">Todo ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col" colSpan={2}>
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {todos?.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          todos.map((todo) => (
+            <tr>
+              <th scope="row">{todo._id}</th>
+              <td>{todo.title}</td>
+              <td>{todo.description}</td>
+              <td>
+                <button
+                  onClick={() =>
+                    editTodoHandler(todo._id, todo.title, todo.description)
+                  }
+                >
+                  Edit
+                </button>
+              </td>
+              <td>
+                <button onClick={() => deleteTodoHandler(todo._id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
   );
 };
 export default TodosList;
