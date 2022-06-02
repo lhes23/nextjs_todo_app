@@ -8,7 +8,6 @@ const TodosList = ({
   setTodoId,
 }) => {
   const editTodoHandler = (_id, title, description) => {
-    console.log(_id, title, description);
     setTodoId(_id);
     setTitle(title);
     setDescription(description);
