@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import AddTodoForm from "../components/addTodoForm";
-import Layout from "../components/Layout";
 import TodosList from "../components/TodosList";
+
+import styles from "../styles/Home.module.css";
 
 export async function getServerSideProps() {
   const res = await fetch("http://localhost:3000/api/todo");
@@ -30,27 +31,28 @@ export default function Home({ todos }) {
     router.replace(router.asPath);
   };
   return (
-    <Layout>
-      <div className="card">hello</div>
-      <AddTodoForm
-        todo_api_url={todo_api_url}
-        title={title}
-        description={description}
-        setTitle={setTitle}
-        setDescription={setDescription}
-        refreshData={refreshData}
-        forUpdate={forUpdate}
-        todoId={todoId}
-      />
-      <TodosList
-        todos={todos}
-        todo_api_url={todo_api_url}
-        setTitle={setTitle}
-        setDescription={setDescription}
-        refreshData={refreshData}
-        setForUpdate={setForUpdate}
-        setTodoId={setTodoId}
-      />
-    </Layout>
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <AddTodoForm
+          todo_api_url={todo_api_url}
+          title={title}
+          description={description}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          refreshData={refreshData}
+          forUpdate={forUpdate}
+          todoId={todoId}
+        />
+        <TodosList
+          todos={todos}
+          todo_api_url={todo_api_url}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          refreshData={refreshData}
+          setForUpdate={setForUpdate}
+          setTodoId={setTodoId}
+        />
+      </div>
+    </div>
   );
 }
