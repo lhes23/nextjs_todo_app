@@ -1,28 +1,43 @@
-import { useState } from "react";
-
 const AddTodoForm = ({
   todo_api_url,
   title,
   description,
   setTitle,
   setDescription,
-  onSubmit,
   refreshData,
+  forUpdate,
+  todoId,
 }) => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const res = await fetch(todo_api_url, {
-      method: "POST",
-      body: JSON.stringify({ title, description }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.status < 300) {
-      setTitle("");
-      setDescription("");
-      refreshData();
+    let res = {};
+    if (forUpdate) {
+      const _id = todoId;
+      res = await fetch(todo_api_url, {
+        method: "PUT",
+        body: JSON.stringify({ _id, title, description }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status < 300) {
+        setTitle("");
+        setDescription("");
+        refreshData();
+      }
+    } else {
+      res = await fetch(todo_api_url, {
+        method: "POST",
+        body: JSON.stringify({ title, description }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status < 300) {
+        setTitle("");
+        setDescription("");
+        refreshData();
+      }
     }
   };
   return (

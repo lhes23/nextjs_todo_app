@@ -20,6 +20,8 @@ export default function Home({ todos }) {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [forUpdate, setForUpdate] = useState(false);
+  const [todoId, setTodoId] = useState("");
 
   const router = useRouter();
 
@@ -29,6 +31,7 @@ export default function Home({ todos }) {
   };
   return (
     <Layout>
+      <div className="card">hello</div>
       <AddTodoForm
         todo_api_url={todo_api_url}
         title={title}
@@ -36,11 +39,17 @@ export default function Home({ todos }) {
         setTitle={setTitle}
         setDescription={setDescription}
         refreshData={refreshData}
+        forUpdate={forUpdate}
+        todoId={todoId}
       />
       <TodosList
         todos={todos}
         todo_api_url={todo_api_url}
+        setTitle={setTitle}
+        setDescription={setDescription}
         refreshData={refreshData}
+        setForUpdate={setForUpdate}
+        setTodoId={setTodoId}
       />
     </Layout>
   );
