@@ -28,73 +28,75 @@ const TodosList = ({
     }
   };
   return (
-    <table className="table table-striped table-light table-responsive my-4">
-      <thead>
-        <tr>
-          <th scope="col">Todo ID</th>
-          <th scope="col">Title</th>
-          <th scope="col">Description</th>
-          <th scope="col" colSpan={2} className="text-center">
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {todos?.length === 0 ? (
-          <p>Loading...</p>
-        ) : (
-          todos.map((todo, i) => (
-            <motion.tr
-              key={todo._id}
-              initial="hidden"
-              animate="visible"
-              whileHover={{
-                scale: 1.05,
-                transition: {
-                  duration: 0.1,
-                },
-              }}
-              variants={{
-                hidden: {
-                  opacity: 0,
-                  y: 50,
-                },
-                visible: {
-                  opacity: 1,
-                  y: 0,
+    <div className="col-12">
+      <table className="table table-striped table-light table-responsive my-4">
+        <thead>
+          <tr>
+            <th scope="col">Todo ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col" colSpan={2} className="text-center">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {todos?.length === 0 ? (
+            <p>Loading...</p>
+          ) : (
+            todos.map((todo, i) => (
+              <motion.tr
+                key={todo._id}
+                initial="hidden"
+                animate="visible"
+                whileHover={{
+                  scale: 1.05,
                   transition: {
-                    duration: 0.2,
-                    delay: i * 0.3,
+                    duration: 0.1,
                   },
-                },
-              }}
-            >
-              <th scope="row">{todo._id}</th>
-              <td>{todo.title}</td>
-              <td>{todo.description}</td>
-              <td>
-                <button
-                  onClick={() =>
-                    editTodoHandler(todo._id, todo.title, todo.description)
-                  }
-                  className="btn btn-warning"
-                >
-                  Edit
-                </button>
-              </td>
-              <td>
-                <button
-                  onClick={() => deleteTodoHandler(todo._id)}
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </td>
-            </motion.tr>
-          ))
-        )}
-      </tbody>
-    </table>
+                }}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    y: 50,
+                  },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.2,
+                      delay: i * 0.3,
+                    },
+                  },
+                }}
+              >
+                <th scope="row">{todo._id}</th>
+                <td>{todo.title}</td>
+                <td>{todo.description}</td>
+                <td>
+                  <button
+                    onClick={() =>
+                      editTodoHandler(todo._id, todo.title, todo.description)
+                    }
+                    className="btn btn-warning"
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => deleteTodoHandler(todo._id)}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </motion.tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 export default TodosList;
