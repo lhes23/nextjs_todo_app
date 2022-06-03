@@ -12,13 +12,13 @@ dbConnect();
 const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
-      if (req.query) {
-        // console.log(req.query);
+      if (req.query.id) {
         await getTodoDetail(req, res);
         break;
+      } else {
+        await getAllTodo(req, res);
+        break;
       }
-      await getAllTodo(req, res);
-      break;
     case "POST":
       await addTodo(req, res);
       break;

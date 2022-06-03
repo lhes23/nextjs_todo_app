@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const TodoDetails = () => {
+  const [todo, setTodo] = useState({});
   const router = useRouter();
   const { id } = router.query;
 
@@ -9,15 +11,22 @@ const TodoDetails = () => {
     const fetchData = async () => {
       const res = await fetch(`http://localhost:3000/api/todo/${id}`);
       const data = await res.json();
-      console.log(data);
+      setTodo(data.todo);
     };
     fetchData();
   }, []);
 
   return (
     <div>
-      {/* <h1>{title}</h1>
-      <h2>{description}</h2> */}
+      {todo.length === 0 ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <h1>{todo.title}</h1>
+          <h2>{todo.description}</h2>
+          <Link href="/">Home</Link>
+        </>
+      )}
     </div>
   );
 };
