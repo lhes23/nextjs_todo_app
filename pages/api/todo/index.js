@@ -1,16 +1,22 @@
-import dbConnect from "../../utils/dbConnect";
+import dbConnect from "../../../utils/dbConnect";
 import {
   getAllTodo,
   addTodo,
   deleteTodo,
   updateTodo,
-} from "../../controllers/todoController";
+  getTodoDetail,
+} from "../../../controllers/todoController";
 
 dbConnect();
 
 const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
+      if (req.query) {
+        // console.log(req.query);
+        await getTodoDetail(req, res);
+        break;
+      }
       await getAllTodo(req, res);
       break;
     case "POST":

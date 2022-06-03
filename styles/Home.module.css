@@ -6,16 +6,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background: linear-gradient(
-    to right,
-    rgba(85, 150, 219, 08),
-    rgba(190, 20, 60, 30)
-  );
 }
 
 .formCard {
   background: rgba(255, 255, 255, 0.482);
   padding: 2rem;
-  border-radius: 10px;
+  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
 }
