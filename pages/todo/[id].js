@@ -2,19 +2,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const TodoDetails = () => {
-  const [todo, setTodo] = useState({});
-  const router = useRouter();
-  const { id } = router.query;
+const TodoDetails = ({ todo }) => {
+  // const [todo, setTodo] = useState({});
+  // const router = useRouter();
+  // const { id } = router.query;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`http://localhost:3000/api/todo/${id}`);
-      const data = await res.json();
-      setTodo(data.todo);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch(`http://localhost:3000/api/todo/${id}`);
+  //     const data = await res.json();
+  //     setTodo(data.todo);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <div>
@@ -30,4 +30,14 @@ const TodoDetails = () => {
     </div>
   );
 };
+
+TodoDetails.getInitialProps = async (ctx) => {
+  const { id } = ctx.query;
+  const res = await fetch(`http://localhost:3000/api/todo/${id}`);
+  const data = await res.json();
+  return {
+    todo: data.todo,
+  };
+};
+
 export default TodoDetails;
