@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddTodoForm from "../../components/addTodoForm";
+import {
+  setTodoId,
+  setTitle,
+  setDescription,
+  setForUpdate,
+} from "../../slices/todoSlice";
 
 const TodoDetails = ({ todo }) => {
   const { _id, title, description } = todo;
   const dispatch = useDispatch();
+  const forUpdate = useSelector((state) => state.todo.forUpdate);
+  dispatch(setTodoId(_id));
+  dispatch(setTitle(title));
+  dispatch(setDescription(description));
 
-  const editTodoHandler = (_id, title, description) => {
-    dispatch(setTodoId(_id));
-    dispatch(setTitle(title));
-    dispatch(setDescription(description));
+  const editTodoHandler = () => {
+    console.log(_id);
     dispatch(setForUpdate(true));
   };
 
@@ -43,13 +50,21 @@ const TodoDetails = ({ todo }) => {
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{description}</p>
               <Link href="/">
-                <a className="btn btn-primary px-5 mx-1">Home</a>
+                <a
+                  className="btn btn-primary px-5 mx-1"
+                  onClick={() => {
+                    dispatch(setTodoId(""));
+                    dispatch(setTitle(""));
+                    dispatch(setDescription(""));
+                    dispatch(setForUpdate(false));
+                  }}
+                >
+                  Home
+                </a>
               </Link>
               <button
                 className="btn btn-warning px-5 mx-1"
-                onClick={() => {
-                  editHandler(_id);
-                }}
+                onClick={editTodoHandler}
               >
                 Edit
               </button>
@@ -64,20 +79,7 @@ const TodoDetails = ({ todo }) => {
             </div>
           </div>
         </div>
-        <div className="col-6 m-5">
-          {/* {onEdit && (
-                <AddTodoForm
-                  todo_api_url={`http://localhost:3000/api/todo/${_id}`}
-                  title={title}
-                  description={description}
-                  setTitle={setTitle}
-                  setDescription={setDescription}
-                  refreshData={refreshData}
-                  forUpdate={forUpdate}
-                  todoId={_id}
-                />
-              )} */}
-        </div>
+        <div className="col-6 m-5">{forUpdate && <AddTodoForm />}</div>
       </div>
     </>
   );

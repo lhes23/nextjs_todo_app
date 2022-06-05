@@ -18,8 +18,12 @@ export const todoSlice = createSlice({
     setDescription: (state, action) => {
       state.description = action.payload;
     },
-    setForUpdate: (state) => state.forUpdate(!state.forUpdate),
-    setTodoId: (state) => (state.todoId = action.payload),
+    setForUpdate: (state, action) => {
+      state.forUpdate = action.payload;
+    },
+    setTodoId: (state, action) => {
+      state.todoId = action.payload;
+    },
   },
 });
 

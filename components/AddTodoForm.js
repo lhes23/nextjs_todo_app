@@ -1,9 +1,10 @@
 import styles from "../styles/Home.module.css";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setTitle, setDescription } from "../slices/todoSlice";
+import { setTitle, setDescription, setForUpdate } from "../slices/todoSlice";
+import { useRouter } from "next/router";
 
-const AddTodoForm = ({ refreshData }) => {
+const AddTodoForm = () => {
   const dispatch = useDispatch();
   const title = useSelector((state) => state.todo.title);
   const description = useSelector((state) => state.todo.description);
@@ -11,13 +12,17 @@ const AddTodoForm = ({ refreshData }) => {
   const todoApiUrl = useSelector((state) => state.todo.todoApiUrl);
   const todoId = useSelector((state) => state.todo.todoId);
 
+  const router = useRouter();
+
   const formSubmitHandler = async (e) => {
     e.preventDefault();
+
+    console.log(forUpdate);
 
     let res = {};
     if (forUpdate) {
       const _id = todoId;
-      res = await fetch(todoApiUrl, {
+      res = await fetch(`http://localhost:3000/api/todo/${_id}`, {
         method: "PUT",
         body: JSON.stringify({ _id, title, description }),
         headers: {
@@ -25,9 +30,10 @@ const AddTodoForm = ({ refreshData }) => {
         },
       });
       if (res.status < 300) {
-        refreshData();
+        router.replace(router.asPath);
         dispatch(setTitle(""));
         dispatch(setDescription(""));
+        dispatch(setForUpdate(false));
       }
     } else {
       res = await fetch(todoApiUrl, {
@@ -38,7 +44,7 @@ const AddTodoForm = ({ refreshData }) => {
         },
       });
       if (res.status < 300) {
-        refreshData();
+        router.replace("/");
         dispatch(setTitle(""));
         dispatch(setDescription(""));
       }

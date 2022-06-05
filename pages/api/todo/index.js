@@ -1,11 +1,5 @@
 import dbConnect from "../../../utils/dbConnect";
-import {
-  getAllTodo,
-  addTodo,
-  deleteTodo,
-  updateTodo,
-  getTodoDetail,
-} from "../../../controllers/todoController";
+import { getAllTodo, addTodo } from "../../../controllers/todoController";
 
 dbConnect();
 
@@ -16,9 +10,6 @@ const handler = async (req, res) => {
       break;
     case "POST":
       await addTodo(req, res);
-      break;
-    case "PUT":
-      await updateTodo(req, res);
       break;
     default:
       res.status(400).json({ error: "error" });

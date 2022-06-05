@@ -1,4 +1,8 @@
-import { getTodoDetail, deleteTodo } from "../../../controllers/todoController";
+import {
+  getTodoDetail,
+  deleteTodo,
+  updateTodo,
+} from "../../../controllers/todoController";
 import dbConnect from "../../../utils/dbConnect";
 
 dbConnect();
@@ -10,6 +14,9 @@ const handler = async (req, res) => {
       break;
     case "DELETE":
       await deleteTodo(req, res);
+      break;
+    case "PUT":
+      await updateTodo(req, res);
       break;
     default:
       res.json({ success: false });
