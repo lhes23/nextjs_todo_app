@@ -17,8 +17,6 @@ const AddTodoForm = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    console.log(forUpdate);
-
     let res = {};
     if (forUpdate) {
       const _id = todoId;

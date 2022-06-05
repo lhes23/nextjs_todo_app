@@ -32,7 +32,6 @@ export default function Home({ todos }) {
       <div className={`row ${styles.main}`}>
         <div className="d-flex justify-content-center">
           <h1>NextJS Todo App!</h1>
-          <Link href="/api/todo">TODO</Link>
         </div>
         <div className="col-md col-lg-6">
           <AddTodoForm refreshData={refreshData} />
