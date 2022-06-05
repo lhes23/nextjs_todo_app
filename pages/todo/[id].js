@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddTodoForm from "../../components/addTodoForm";
 
 const TodoDetails = ({ todo }) => {
   const { _id, title, description } = todo;
+  const dispatch = useDispatch();
 
   const editTodoHandler = (_id, title, description) => {
     dispatch(setTodoId(_id));
@@ -14,7 +16,7 @@ const TodoDetails = ({ todo }) => {
   };
 
   const deleteTodoHandler = async (_id) => {
-    const res = await fetch(todoApiUrl, {
+    const res = await fetch(`http://localhost:3000/api/todo/${_id}`, {
       method: "DELETE",
       body: JSON.stringify({ _id }),
       headers: {
@@ -26,41 +28,44 @@ const TodoDetails = ({ todo }) => {
     }
   };
 
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace("/");
+  };
+
   return (
-    <div>
-      {todo === null ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <div className="row justify-content-center">
-            <div className="col-6 my-5">
-              <div className="card">
-                <div className="card-header">Featured</div>
-                <div className="card-body">
-                  <h5 className="card-title">{title}</h5>
-                  <p className="card-text">{description}</p>
-                  <Link href="/">
-                    <a className="btn btn-primary px-5 mx-1">Home</a>
-                  </Link>
-                  <button
-                    className="btn btn-warning px-5 mx-1"
-                    onClick={() => {
-                      editHandler(_id);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-danger px-5 mx-1"
-                    onClick={() => {}}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
+    <>
+      <div className="row justify-content-center">
+        <div className="col-6 my-5">
+          <div className="card">
+            <div className="card-header">Featured</div>
+            <div className="card-body">
+              <h5 className="card-title">{title}</h5>
+              <p className="card-text">{description}</p>
+              <Link href="/">
+                <a className="btn btn-primary px-5 mx-1">Home</a>
+              </Link>
+              <button
+                className="btn btn-warning px-5 mx-1"
+                onClick={() => {
+                  editHandler(_id);
+                }}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger px-5 mx-1"
+                onClick={() => {
+                  deleteTodoHandler(_id);
+                }}
+              >
+                Delete
+              </button>
             </div>
-            <div className="col-6 m-5">
-              {onEdit && (
+          </div>
+        </div>
+        <div className="col-6 m-5">
+          {/* {onEdit && (
                 <AddTodoForm
                   todo_api_url={`http://localhost:3000/api/todo/${_id}`}
                   title={title}
@@ -71,12 +76,10 @@ const TodoDetails = ({ todo }) => {
                   forUpdate={forUpdate}
                   todoId={_id}
                 />
-              )}
-            </div>
-          </div>
-        </>
-      )}
-    </div>
+              )} */}
+        </div>
+      </div>
+    </>
   );
 };
 

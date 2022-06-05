@@ -17,9 +17,6 @@ const handler = async (req, res) => {
     case "POST":
       await addTodo(req, res);
       break;
-    case "DELETE":
-      await deleteTodo(req, res);
-      break;
     case "PUT":
       await updateTodo(req, res);
       break;

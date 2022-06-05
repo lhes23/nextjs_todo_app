@@ -25,9 +25,9 @@ const AddTodoForm = ({ refreshData }) => {
         },
       });
       if (res.status < 300) {
+        refreshData();
         dispatch(setTitle(""));
         dispatch(setDescription(""));
-        refreshData();
       }
     } else {
       res = await fetch(todoApiUrl, {
@@ -38,15 +38,15 @@ const AddTodoForm = ({ refreshData }) => {
         },
       });
       if (res.status < 300) {
+        refreshData();
         dispatch(setTitle(""));
         dispatch(setDescription(""));
-        refreshData();
       }
     }
   };
   return (
     <motion.div
-      className={`col-12 d-flex justify-content-center ${styles.formCard}`}
+      className={`d-flex justify-content-center ${styles.formCard}`}
       initial="hidden"
       animate="visible"
       exit="hidden"

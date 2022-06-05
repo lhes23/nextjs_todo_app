@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const TodosList = ({ todos }) => {
   return (
-    <div className="col-6">
+    <div className="col-12">
       <table className="table table-striped table-light table-responsive my-4">
         <thead>
           <tr>

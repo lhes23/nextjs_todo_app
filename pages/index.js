@@ -19,6 +19,7 @@ export default function Home({ todos }) {
   const router = useRouter();
 
   const refreshData = () => {
+    console.log("refresh");
     router.replace(router.asPath);
   };
   return (
@@ -27,8 +28,12 @@ export default function Home({ todos }) {
         <div className="d-flex justify-content-center">
           <h1>NextJS Todo App</h1>
         </div>
-        <AddTodoForm refreshData={refreshData} />
-        <TodosList todos={todos} />
+        <div className="col-md col-lg-6">
+          <AddTodoForm refreshData={refreshData} />
+        </div>
+        <div className="col-md col-lg-6">
+          <TodosList todos={todos} />
+        </div>
       </div>
     </div>
   );
