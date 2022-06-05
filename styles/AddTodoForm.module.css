@@ -1,0 +1,10 @@
+.formCard {
+  background: linear-gradient(
+    to right,
+    rgba(121, 142, 177, 0.708),
+    rgba(255, 255, 255, 0.482)
+  );
+  padding: 2rem;
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}

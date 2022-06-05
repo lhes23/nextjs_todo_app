@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/AddTodoForm.module.css";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle, setDescription, setForUpdate } from "../slices/todoSlice";
