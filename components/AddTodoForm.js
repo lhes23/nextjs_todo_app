@@ -3,17 +3,6 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle, setDescription } from "../slices/todoSlice";
 
-// const AddTodoForm = ({
-//   todo_api_url,
-//   title,
-//   description,
-//   setTitle,
-//   setDescription,
-//   refreshData,
-//   forUpdate,
-//   todoId,
-// }) => {
-
 const AddTodoForm = ({ refreshData }) => {
   const dispatch = useDispatch();
   const title = useSelector((state) => state.todo.title);

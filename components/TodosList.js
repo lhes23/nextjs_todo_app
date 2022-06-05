@@ -1,35 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setTitle,
-  setDescription,
-  setTodoId,
-  setForUpdate,
-} from "../slices/todoSlice";
 
-const TodosList = ({ todos, refreshData }) => {
-  const dispatch = useDispatch();
-  const todoApiUrl = useSelector((state) => state.todo.todoApiUrl);
-
-  const editTodoHandler = (_id, title, description) => {
-    dispatch(setTodoId(_id));
-    dispatch(setTitle(title));
-    dispatch(setDescription(description));
-    dispatch(setForUpdate(true));
-  };
-  const deleteTodoHandler = async (_id) => {
-    const res = await fetch(todoApiUrl, {
-      method: "DELETE",
-      body: JSON.stringify({ _id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (res.status < 300) {
-      refreshData();
-    }
-  };
+const TodosList = ({ todos }) => {
   return (
     <div className="col-6">
       <table className="table table-striped table-light table-responsive my-4">

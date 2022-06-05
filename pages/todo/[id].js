@@ -1,14 +1,29 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import AddTodoForm from "../../components/addTodoForm";
 
 const TodoDetails = ({ todo }) => {
   const { _id, title, description } = todo;
-  const [onEdit, setOnEdit] = useState(false);
 
-  const editHandler = (_id) => {
-    console.log(_id);
-    setOnEdit((prevEdit) => !prevEdit);
+  const editTodoHandler = (_id, title, description) => {
+    dispatch(setTodoId(_id));
+    dispatch(setTitle(title));
+    dispatch(setDescription(description));
+    dispatch(setForUpdate(true));
+  };
+
+  const deleteTodoHandler = async (_id) => {
+    const res = await fetch(todoApiUrl, {
+      method: "DELETE",
+      body: JSON.stringify({ _id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.status < 300) {
+      refreshData();
+    }
   };
 
   return (
