@@ -36,7 +36,7 @@ const AddTodoForm = () => {
         dispatch(setForUpdate(false));
       }
     } else {
-      res = await fetch(todoApiUrl, {
+      res = await fetch("/api/todo", {
         method: "POST",
         body: JSON.stringify({ title, description }),
         headers: {

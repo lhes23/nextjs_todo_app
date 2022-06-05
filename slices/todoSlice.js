@@ -5,7 +5,6 @@ const initialState = {
   title: "",
   description: "",
   forUpdate: false,
-  todoApiUrl: "http://localhost:3000/api/todo",
 };
 
 export const todoSlice = createSlice({
