@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 import AddTodoForm from "../components/addTodoForm";
 import TodosList from "../components/TodosList";
@@ -17,7 +18,7 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ todos }) {
-  const todo_api_url = "http://localhost:3000/api/todo";
+  const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -27,7 +28,6 @@ export default function Home({ todos }) {
   const router = useRouter();
 
   const refreshData = () => {
-    console.log(router.asPath);
     router.replace(router.asPath);
   };
   return (
@@ -36,25 +36,8 @@ export default function Home({ todos }) {
         <div className="d-flex justify-content-center">
           <h1>NextJS Todo App</h1>
         </div>
-        <AddTodoForm
-          todo_api_url={todo_api_url}
-          title={title}
-          description={description}
-          setTitle={setTitle}
-          setDescription={setDescription}
-          refreshData={refreshData}
-          forUpdate={forUpdate}
-          todoId={todoId}
-        />
-        <TodosList
-          todos={todos}
-          todo_api_url={todo_api_url}
-          setTitle={setTitle}
-          setDescription={setDescription}
-          refreshData={refreshData}
-          setForUpdate={setForUpdate}
-          setTodoId={setTodoId}
-        />
+        <AddTodoForm refreshData={refreshData} />
+        <TodosList todos={todos} refreshData={refreshData} />
       </div>
     </div>
   );
