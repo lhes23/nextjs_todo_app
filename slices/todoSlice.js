@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  todoId: "",
   title: "",
   description: "",
   forUpdate: false,
   todoApiUrl: "http://localhost:3000/api/todo",
-  todoId: "",
 };
 
 export const todoSlice = createSlice({

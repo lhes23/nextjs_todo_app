@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import AddTodoForm from "../../components/addTodoForm";
+
 import {
   setTodoId,
   setTitle,
@@ -16,11 +17,7 @@ const TodoDetails = ({ todo }) => {
   dispatch(setTodoId(_id));
   dispatch(setTitle(title));
   dispatch(setDescription(description));
-
-  const editTodoHandler = () => {
-    console.log(_id);
-    dispatch(setForUpdate(true));
-  };
+  const router = useRouter();
 
   const deleteTodoHandler = async (_id) => {
     const res = await fetch(`http://localhost:3000/api/todo/${_id}`, {
@@ -31,57 +28,59 @@ const TodoDetails = ({ todo }) => {
       },
     });
     if (res.status < 300) {
-      refreshData();
+      router.replace("/");
+      clearData();
     }
   };
 
-  const router = useRouter();
-  const refreshData = () => {
-    router.replace("/");
+  const clearData = () => {
+    dispatch(setTodoId(""));
+    dispatch(setTitle(""));
+    dispatch(setDescription(""));
+    dispatch(setForUpdate(false));
   };
 
   return (
-    <>
-      <div className="row justify-content-center">
-        <div className="col-6 my-5">
-          <div className="card">
-            <div className="card-header">Featured</div>
-            <div className="card-body">
-              <h5 className="card-title">{title}</h5>
-              <p className="card-text">{description}</p>
-              <Link href="/">
-                <a
-                  className="btn btn-primary px-5 mx-1"
-                  onClick={() => {
-                    dispatch(setTodoId(""));
-                    dispatch(setTitle(""));
-                    dispatch(setDescription(""));
-                    dispatch(setForUpdate(false));
-                  }}
-                >
-                  Home
-                </a>
-              </Link>
-              <button
-                className="btn btn-warning px-5 mx-1"
-                onClick={editTodoHandler}
-              >
-                Edit
-              </button>
-              <button
-                className="btn btn-danger px-5 mx-1"
+    <div className="row justify-content-center">
+      <div className="col-6 my-5">
+        <div className="card">
+          <div className="card-header">
+            <h3>Todo Details</h3>
+          </div>
+          <div className="card-body">
+            <h5 className="card-title">{title}</h5>
+            <p className="card-text">{description}</p>
+            <Link href="/">
+              <a
+                className="btn btn-primary px-5 mx-1"
                 onClick={() => {
-                  deleteTodoHandler(_id);
+                  clearData();
                 }}
               >
-                Delete
-              </button>
-            </div>
+                Home
+              </a>
+            </Link>
+            <button
+              className="btn btn-warning px-5 mx-1"
+              onClick={() => {
+                dispatch(setForUpdate(true));
+              }}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-danger px-5 mx-1"
+              onClick={() => {
+                deleteTodoHandler(_id);
+              }}
+            >
+              Delete
+            </button>
           </div>
         </div>
-        <div className="col-6 m-5">{forUpdate && <AddTodoForm />}</div>
       </div>
-    </>
+      <div className="col-6 m-5">{forUpdate && <AddTodoForm />}</div>
+    </div>
   );
 };
 
