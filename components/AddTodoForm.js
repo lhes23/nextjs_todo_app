@@ -22,7 +22,7 @@ const AddTodoForm = () => {
     let res = {};
     if (forUpdate) {
       const _id = todoId;
-      res = await fetch(`http://localhost:3000/api/todo/${_id}`, {
+      res = await fetch(`/api/todo/${_id}`, {
         method: "PUT",
         body: JSON.stringify({ _id, title, description }),
         headers: {

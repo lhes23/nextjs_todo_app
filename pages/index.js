@@ -6,7 +6,7 @@ import TodosList from "../components/TodosList";
 import styles from "../styles/Home.module.css";
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/todo");
+  const res = await fetch("/api/todo");
   const data = await res.json();
   return {
     props: {

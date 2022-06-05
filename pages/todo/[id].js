@@ -20,7 +20,7 @@ const TodoDetails = ({ todo }) => {
   const router = useRouter();
 
   const deleteTodoHandler = async (_id) => {
-    const res = await fetch(`http://localhost:3000/api/todo/${_id}`, {
+    const res = await fetch(`/api/todo/${_id}`, {
       method: "DELETE",
       body: JSON.stringify({ _id }),
       headers: {
