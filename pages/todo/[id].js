@@ -85,8 +85,12 @@ const TodoDetails = ({ todo }) => {
 };
 
 TodoDetails.getInitialProps = async (ctx) => {
+  const baseUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://nextjs-todo-app-lhes23.vercel.app";
   const { id } = ctx.query;
-  const res = await fetch(`http://localhost:3000/api/todo/${id}`);
+  const res = await fetch(`${baseUrl}/api/todo/${id}`);
   const data = await res.json();
   if (!data) {
     return {
