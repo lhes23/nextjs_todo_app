@@ -4,6 +4,6 @@ const nextConfig = {
 };
 
 module.exports = {
-  nextConfig,
+  // nextConfig,
   basePath: "https://nextjs-todo-app-lhes23.vercel.app",
 };
