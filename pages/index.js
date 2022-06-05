@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import AddTodoForm from "../components/AddTodoForm";
 import TodosList from "../components/TodosList";
-import { basePath } from "../next.config";
 
 import styles from "../styles/Home.module.css";
 
