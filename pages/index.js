@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import AddTodoForm from "../components/addTodoForm";
+import AddTodoForm from "../components/AddTodoForm";
 import TodosList from "../components/TodosList";
 
 import styles from "../styles/Home.module.css";

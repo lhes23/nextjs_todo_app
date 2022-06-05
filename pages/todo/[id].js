@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import AddTodoForm from "../../components/addTodoForm";
+import AddTodoForm from "../../components/AddTodoForm";
 
 import {
   setTodoId,
