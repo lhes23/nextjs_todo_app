@@ -40,6 +40,8 @@ const TodosList = ({ todos }) => {
                       },
                     },
                   }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
                 >
                   <td>{todo.title}</td>
                   <td>{todo.description}</td>

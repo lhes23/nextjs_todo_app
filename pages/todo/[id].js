@@ -1,4 +1,5 @@
 import styles from "../../styles/AddTodoForm.module.css";
+import { motion } from "framer-motion";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,6 +12,26 @@ import {
   setDescription,
   setForUpdate,
 } from "../../slices/todoSlice";
+
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const TodoDetails = ({ todo }) => {
   const { _id, title, description } = todo;
@@ -52,32 +73,45 @@ const TodoDetails = ({ todo }) => {
           <div className="card-body" style={{ backgroundColor: "#fff" }}>
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
-            <Link href="/">
-              <a
-                className="btn btn-primary px-5 mx-1"
+            <motion.div
+              className="container"
+              variants={container}
+              initial="hidden"
+              animate="visible"
+            >
+              <Link href="/">
+                <motion.a
+                  className="btn btn-primary px-5 mx-1"
+                  onClick={() => {
+                    clearData();
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  variants={item}
+                >
+                  Home
+                </motion.a>
+              </Link>
+              <motion.button
+                className="btn btn-warning px-5 mx-1"
                 onClick={() => {
-                  clearData();
+                  dispatch(setForUpdate(true));
                 }}
+                whileHover={{ scale: 1.05 }}
+                variants={item}
               >
-                Home
-              </a>
-            </Link>
-            <button
-              className="btn btn-warning px-5 mx-1"
-              onClick={() => {
-                dispatch(setForUpdate(true));
-              }}
-            >
-              Edit
-            </button>
-            <button
-              className="btn btn-danger px-5 mx-1"
-              onClick={() => {
-                deleteTodoHandler(_id);
-              }}
-            >
-              Delete
-            </button>
+                Edit
+              </motion.button>
+              <motion.button
+                className="btn btn-danger px-5 mx-1"
+                onClick={() => {
+                  deleteTodoHandler(_id);
+                }}
+                whileHover={{ scale: 1.05 }}
+                variants={item}
+              >
+                Delete
+              </motion.button>
+            </motion.div>
           </div>
         </div>
       </div>
