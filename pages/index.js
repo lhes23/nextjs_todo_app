@@ -40,17 +40,15 @@ export default function Home({ todos }) {
   }, []);
 
   return (
-    <div className="container">
-      <div className={`row ${styles.main}`}>
-        <div className="d-flex justify-content-center">
-          <h1>NextJS Todo App!</h1>
-        </div>
-        <div className="col-md col-lg-6">
-          <AddTodoForm />
-        </div>
-        <div className="col-md col-lg-6">
-          <TodosList todos={todos} />
-        </div>
+    <div className={`row ${styles.main}`}>
+      <div className="d-flex justify-content-center">
+        <h1>NextJS Todo App!</h1>
+      </div>
+      <div className="col-md col-lg-6">
+        <AddTodoForm />
+      </div>
+      <div className="col-md col-lg-6">
+        <TodosList todos={todos} />
       </div>
     </div>
   );

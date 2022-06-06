@@ -64,7 +64,7 @@ const TodoDetails = ({ todo }) => {
   };
 
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center p-4">
       <div className="col-md col-lg-6 my-5">
         <div className={`card ${styles.formCard}`}>
           <div className="card-header">
