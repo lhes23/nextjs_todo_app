@@ -1,5 +1,11 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setTodoId,
+  setTitle,
+  setDescription,
+  setForUpdate,
+} from "../slices/todoSlice";
 
 import AddTodoForm from "../components/AddTodoForm";
 import TodosList from "../components/TodosList";
@@ -21,12 +27,18 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ todos }) {
-  const router = useRouter();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const clearData = () => {
+      dispatch(setTodoId(""));
+      dispatch(setTitle(""));
+      dispatch(setDescription(""));
+      dispatch(setForUpdate(false));
+    };
 
-  const refreshData = () => {
-    console.log("refresh");
-    router.replace(router.asPath);
-  };
+    clearData();
+  }, []);
+
   return (
     <div className="container">
       <div className={`row ${styles.main}`}>
@@ -34,7 +46,7 @@ export default function Home({ todos }) {
           <h1>NextJS Todo App!</h1>
         </div>
         <div className="col-md col-lg-6">
-          <AddTodoForm refreshData={refreshData} />
+          <AddTodoForm />
         </div>
         <div className="col-md col-lg-6">
           <TodosList todos={todos} />

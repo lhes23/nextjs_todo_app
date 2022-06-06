@@ -9,7 +9,6 @@ const AddTodoForm = () => {
   const title = useSelector((state) => state.todo.title);
   const description = useSelector((state) => state.todo.description);
   const forUpdate = useSelector((state) => state.todo.forUpdate);
-  const todoApiUrl = useSelector((state) => state.todo.todoApiUrl);
   const todoId = useSelector((state) => state.todo.todoId);
 
   const router = useRouter();

@@ -1,3 +1,5 @@
+import styles from "../../styles/AddTodoForm.module.css";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,11 +45,11 @@ const TodoDetails = ({ todo }) => {
   return (
     <div className="row justify-content-center">
       <div className="col-6 my-5">
-        <div className="card">
+        <div className={`card ${styles.formCard}`}>
           <div className="card-header">
             <h3>Todo Details</h3>
           </div>
-          <div className="card-body">
+          <div className="card-body" style={{ backgroundColor: "#fff" }}>
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
             <Link href="/">
