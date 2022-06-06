@@ -65,7 +65,7 @@ const TodoDetails = ({ todo }) => {
 
   return (
     <div className="row justify-content-center">
-      <div className="col-6 my-5">
+      <div className="col-md col-lg-6 my-5">
         <div className={`card ${styles.formCard}`}>
           <div className="card-header">
             <h3>Todo Details</h3>
@@ -74,14 +74,14 @@ const TodoDetails = ({ todo }) => {
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
             <motion.div
-              className="container"
+              className="container col-md"
               variants={container}
               initial="hidden"
               animate="visible"
             >
               <Link href="/">
                 <motion.a
-                  className="btn btn-primary px-5 mx-1"
+                  className="btn btn-primary px-5 mx-2 my-2"
                   onClick={() => {
                     clearData();
                   }}
@@ -92,7 +92,7 @@ const TodoDetails = ({ todo }) => {
                 </motion.a>
               </Link>
               <motion.button
-                className="btn btn-warning px-5 mx-1"
+                className="btn btn-warning px-5 mx-2 my-2"
                 onClick={() => {
                   dispatch(setForUpdate(true));
                 }}
@@ -102,7 +102,7 @@ const TodoDetails = ({ todo }) => {
                 Edit
               </motion.button>
               <motion.button
-                className="btn btn-danger px-5 mx-1"
+                className="btn btn-danger px-5 mx-2 my-2"
                 onClick={() => {
                   deleteTodoHandler(_id);
                 }}
@@ -115,7 +115,7 @@ const TodoDetails = ({ todo }) => {
           </div>
         </div>
       </div>
-      <div className="col-6 m-5">{forUpdate && <AddTodoForm />}</div>
+      <div className="col-md col-lg-6 m-5">{forUpdate && <AddTodoForm />}</div>
     </div>
   );
 };
